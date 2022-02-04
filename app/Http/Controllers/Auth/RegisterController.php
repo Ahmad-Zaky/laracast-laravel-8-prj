@@ -18,6 +18,6 @@ class RegisterController extends Controller
     {
         User::create($request->validated());
 
-        return redirect()->route('posts.index');
+        return redirect()->route('posts.index')->with('success', 'Your Account has been Created');
     }
 }

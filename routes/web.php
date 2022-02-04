@@ -6,8 +6,10 @@ use App\Http\Controllers\PostController;
 use App\Http\Controllers\Auth\RegisterController;
 
 // Auth
-Route::get('register', [RegisterController::class, 'create'])->name("auth.register");
-Route::post('register', [RegisterController::class, 'store'])->name("auth.register");
+Route::middleware('guest')->group( function () {
+    Route::get('register', [RegisterController::class, 'create'])->name("auth.register");
+    Route::post('register', [RegisterController::class, 'store'])->name("auth.register");
+});
 
 // Posts
 Route::get('/', [PostController::class, 'index'])->name("posts.index");
