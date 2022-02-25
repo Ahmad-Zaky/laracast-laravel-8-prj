@@ -23,6 +23,9 @@ class RegisterStoreRequest extends FormRequest
      */
     public function rules()
     {
+        if (! $this->isMethod('post'))
+            return [];
+             
         return [
             "name"      => "required|max:255",
             "username"  => "required|min:3|max:255|unique:users,username",

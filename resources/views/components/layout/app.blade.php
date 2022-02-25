@@ -17,8 +17,20 @@
                 </a>
             </div>
 
-            <div class="mt-8 md:mt-0">
-                @auth <a href="{{ route('auth.register') }}" class="text-xs font-bold uppercase">Register</a> @endauth
+            <div class="mt-8 md:mt-0 flex items-center">
+                @auth
+                    <span class="text-xs font-bold uppercase">Welcome, {{ auth()->user()->name }} !</span>
+
+                    <form method="POST" action="{{route('auth.logout')}}">
+                        @csrf
+
+                        <button type="submit" class="text-xs font-bold text-blue-500 ml-6">Log Out</button>
+                    </form>
+                @else 
+                    <a href="{{ route('auth.register') }}" class="text-xs font-bold uppercase">Register</a> 
+                    <a href="{{ route('auth.login') }}" class="text-xs font-bold uppercase text-blue-500 ml-6">Login</a> 
+                @endauth
+                
                 <a href="#" class="bg-blue-500 ml-3 rounded-full text-xs font-semibold text-white uppercase py-3 px-5">
                     Subscribe for Updates
                 </a>
