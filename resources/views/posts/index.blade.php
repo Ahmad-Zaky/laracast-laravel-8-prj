@@ -6,8 +6,10 @@
         @if ($posts->count())
             <x-posts.index :posts="$posts" />
             
-            {{-- Pagination --}}
-            {{$posts->links()}}
+            <x-layout.reuse.panel class="bg-gray-50">
+                {{-- Pagination --}}
+                {{$posts->links()}}
+            </x-layout.reuse.panel>
             
         @else
             <p class="text-center text-2xl">No posts yet. Please check back again.</p>

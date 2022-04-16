@@ -25,11 +25,8 @@
                         required
                     >
 
-                    @error('name')
-                        <p class="text-red-500 text-xs mt-1">
-                            {{ $message }}
-                        </p>
-                    @enderror
+                    <x-layout.reuse.inline-error :field="'name'" />
+
                 </div>
 
                 <div class="mb-6">
@@ -49,11 +46,8 @@
                         required
                     >
 
-                    @error('username')
-                        <p class="text-red-500 text-xs mt-1">
-                            {{ $message }}
-                        </p>
-                    @enderror
+                    <x-layout.reuse.inline-error :field="'username'" />
+
                 </div>
 
                 <div class="mb-6">
@@ -73,11 +67,8 @@
                         required
                     >
                     
-                    @error('email')
-                        <p class="text-red-500 text-xs mt-1">
-                            {{ $message }}
-                        </p>
-                    @enderror
+                    <x-layout.reuse.inline-error :field="'email'" />
+                    
                 </div>
 
                 <div class="mb-6">
@@ -96,11 +87,8 @@
                         required
                     >
                     
-                    @error('password')
-                        <p class="text-red-500 text-xs mt-1">
-                            {{ $message }}
-                        </p>
-                    @enderror
+                    <x-layout.reuse.inline-error :field="'password'" />
+
                 </div>
 
                 <div class="mb-6">

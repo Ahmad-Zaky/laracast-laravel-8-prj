@@ -51,6 +51,19 @@
                     {!! $post->body !!}
                 </div>
             </div>
+
+            <section class="col-span-8 col-start-5 mt-10 space-y-6">
+                
+                @auth
+                    <x-posts.comment-form :post="$post" />
+                @else
+                    <x-layout.reuse.comment-guest-msg />
+                @endauth
+
+                @foreach ($post->comments->sortByDesc('id') as $comment)   
+                    <x-posts.comment :comment="$comment" />
+                @endforeach
+            </section>
         </article>
     </main>
 
