@@ -4,7 +4,7 @@
             
             <h1 class="text-center font-bold text-lg mb-10">Register !</h1>
 
-            <form method="POST" action="{{route('auth.register')}}">
+            <form method="POST" action="{{route('register')}}">
                 
                 @csrf
                 

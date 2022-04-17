@@ -28,8 +28,8 @@
                         <button type="submit" class="text-xs font-bold text-blue-500 ml-6">Log Out</button>
                     </form>
                 @else 
-                    <a href="{{ route('auth.register') }}" class="text-xs font-bold uppercase">Register</a> 
-                    <a href="{{ route('auth.login') }}" class="text-xs font-bold uppercase text-blue-500 ml-6">Login</a> 
+                    <a href="{{ route('register') }}" class="text-xs font-bold uppercase">Register</a> 
+                    <a href="{{ route('login') }}" class="text-xs font-bold uppercase text-blue-500 ml-6">Login</a> 
                 @endauth
                 
                 <a href="#newsletter" class="bg-blue-500 ml-3 rounded-full text-xs font-semibold text-white uppercase py-3 px-5">
