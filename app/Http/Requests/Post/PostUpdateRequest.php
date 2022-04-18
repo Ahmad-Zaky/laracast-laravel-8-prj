@@ -3,10 +3,9 @@
 namespace App\Http\Requests\Post;
 
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
 
-class PostStoreRequest extends FormRequest
+class PostUpdateRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -27,12 +26,11 @@ class PostStoreRequest extends FormRequest
     {
         return [
             'title'         => 'required',
-            'slug'          => 'required|unique:posts,slug',
+            'slug'          => 'required|unique:posts,slug,'. $this->post->id,
             'excerpt'       => 'required',
-            'thumbnail'     => 'required|image',
+            'thumbnail'     => 'image',
             'body'          => 'required',
             'category_id'   => 'required|exists:categories,id',
-            'user_id'       => 'required|exists:users,id',
         ];
     }
 
@@ -56,7 +54,6 @@ class PostStoreRequest extends FormRequest
     public function validationData()
     {
         $this->merge([
-            'user_id' => Auth::id(),
             'slug' => Str::slug($this->title),
         ]);
 

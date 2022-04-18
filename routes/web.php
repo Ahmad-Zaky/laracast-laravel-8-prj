@@ -1,9 +1,11 @@
 <?php
 
+use App\Http\Controllers\AdminPostController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\PostCommentsController;
 use App\Http\Controllers\Auth\SessionController;
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\NewsletterController;
 
 
@@ -27,11 +29,13 @@ Route::middleware('guest')->group( function () {
 // Auth
 Route::middleware('auth')->group( function () {
     // Log Out
-    Route::post('logout', [SessionController::class, 'logout'])->name("auth.logout");
+    Route::post('logout', [SessionController::class, 'logout'])->name("logout");
 
-    Route::prefix('admin')->middleware('admin')->group( function () {
-        Route::get('posts/create', [PostController::class, 'create'])->name('posts.create');
-        Route::post('posts', [PostController::class, 'store'])->name('posts.store');
+    Route::prefix('admin')->name('admin.')->middleware('can:admin')->group( function () {
+        Route::get('dashboard', DashboardController::class)->name('dashboard');
+
+        // Posts
+        Route::resource('posts', AdminPostController::class)->except('show');
     });
 
     // Post Comments

@@ -2,7 +2,11 @@
 
 namespace App\Providers;
 
+use App\Models\User;
 use App\Services\Newsletters\Contracts\Newsletter;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Blade;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -24,6 +28,8 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+        Gate::define('admin', fn (User $user) =>  $user->is_admin);
+
+        Blade::if('admin', fn () => Auth::user()?->can('admin'));
     }
 }

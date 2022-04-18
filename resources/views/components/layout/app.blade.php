@@ -20,13 +20,42 @@
 
             <div class="mt-8 md:mt-0 flex items-center">
                 @auth
-                    <span class="text-xs font-bold uppercase">Welcome, {{ auth()->user()->name }} !</span>
+                
+                <x-layout.dropdown>
+                    <x-slot name="trigger">
 
-                    <form method="POST" action="{{route('auth.logout')}}">
-                        @csrf
+                        <button class="text-xs font-bold uppercase w-full lg:w-44 flex lg:inline-flex">
+                            
+                            Welcome, {{ auth()->user()->name }} ! 
+                            
+                            <x-layout.icon name="down-arrow" class="absolute pointer-events-none" style="right: 12px;"></x-layout.icon>
+                            
+                        </button>
+                        
+                    </x-slot>
+                    
+                        @admin
+                            <x-layout.dropdown-item 
+                                href="{{ route('admin.dashboard') }}"
+                                :active="request()->routeIs('admin.dashboard')"
+                            >
+                                Dashboard
+                            </x-layout.dropdown-item>
+                        @endadmin
+                        
+                        <x-layout.dropdown-item 
+                            href="javascript:void(0)"
+                            x-dataj="{}"
+                            @click.prevent="document.querySelector('#logout').submit()"
+                        >
+                            Log Out
+                        </x-layout.dropdown-item>
+                        
+                        {{-- Log Out Form --}}
+                        <form id="logout" method="POST" action="{{route('logout')}}"> @csrf </form>
 
-                        <button type="submit" class="text-xs font-bold text-blue-500 ml-6">Log Out</button>
-                    </form>
+                    </x-layout.dropdown>
+
                 @else 
                     <a href="{{ route('register') }}" class="text-xs font-bold uppercase">Register</a> 
                     <a href="{{ route('login') }}" class="text-xs font-bold uppercase text-blue-500 ml-6">Login</a> 
@@ -82,7 +111,7 @@
     </section>
     
     {{-- Flash Messages --}}
-    <x-layout.flash.success />
-
+    <x-layout.flash.msg />
+    
     <script src="/script.js"></script>
 </body>
